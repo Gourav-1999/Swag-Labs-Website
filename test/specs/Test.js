@@ -8,15 +8,16 @@ const Locators = require('../../ConfigData/locators');
 const loginPage = require('../pageobjects/loginPage');
 const HomePage = require('../pageobjects/homePageDropDown');
 const AddToCart = require('../pageobjects/addToCart');
+const Menu = require('../pageobjects/openMenu');
 describe('Check Login Credentials', async()=>{
-    it('should login with invalid credentials', async()=>{
+    xit('should login with invalid credentials', async()=>{
         await LoginPage.open();
         await LoginPage.login(LoginData.invalidusername,LoginData.invalidpassword)
         let a = await LoginPage.geterrorValue();
         console.log(a)
         expectChai(a).to.equal(LoginData.errormessage1)
     })
-    it('Should login with Accepted Username', async()=>{
+    xit('Should login with Accepted Username', async()=>{
         await LoginPage.open();
         await LoginPage.login(LoginData.username2,LoginData.password)
         let b = await LoginPage.geterrorValue();
@@ -27,16 +28,21 @@ describe('Check Login Credentials', async()=>{
         await LoginPage.open();
         await LoginPage.login(LoginData.username1,LoginData.password)
     })
-    xit('Check functionality of Products dropdown button', async()=>{
+    it('Check functionality of Products dropdown button', async()=>{
         await LoginPage.open();
         await LoginPage.login(LoginData.username1,LoginData.password)
         await LoginPage.wait();
         await HomePage.select();
         await LoginPage.wait();
     })
-    xit('Check functionality of add to cart and further process', async()=>{
+    it('Check functionality of add to cart and further process', async()=>{
         await LoginPage.open();
         await LoginPage.login(LoginData.username1,LoginData.password)
         await AddToCart.test();
+    })
+    it('Check functionality of open menu',async()=>{
+        await LoginPage.open();
+        await LoginPage.login(LoginData.username1,LoginData.password) 
+        await Menu.test();
     })
 })
